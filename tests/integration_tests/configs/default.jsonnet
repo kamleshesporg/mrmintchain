@@ -23,12 +23,12 @@
       },
     },
     validators: [{
-      coins: '1000000000000000000stake,10000000000000000000000mnt',
-      staked: '1000000000000000000stake',
+      coins: '1000000000000000000mnt,10000000000000000000000mnt',
+      staked: '1000000000000000000mnt',
       mnemonic: '${VALIDATOR1_MNEMONIC}',
     }, {
-      coins: '1000000000000000000stake,10000000000000000000000mnt',
-      staked: '1000000000000000000stake',
+      coins: '1000000000000000000mnt,10000000000000000000000mnt',
+      staked: '1000000000000000000mnt',
       mnemonic: '${VALIDATOR2_MNEMONIC}',
     }],
     accounts: [{

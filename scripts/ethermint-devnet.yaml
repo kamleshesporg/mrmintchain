@@ -11,11 +11,11 @@ mrmintchain_9000-1:
       ws-address: "127.0.0.1:{EVMRPC_PORT_WS}"
       api: "eth,net,web3,debug"
   validators:
-    - coins: 1000000000000000000stake,10000000000000000000000mnt
-      staked: 1000000000000000000stake
+    - coins: 1000000000000000000mnt,10000000000000000000000mnt
+      staked: 1000000000000000000mnt
       mnemonic: ${VALIDATOR1_MNEMONIC}
-    - coins: 1000000000000000000stake,10000000000000000000000mnt
-      staked: 1000000000000000000stake
+    - coins: 1000000000000000000mnt,10000000000000000000000mnt
+      staked: 1000000000000000000mnt
       mnemonic: ${VALIDATOR2_MNEMONIC}
   accounts:
     - name: community

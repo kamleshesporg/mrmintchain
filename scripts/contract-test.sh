@@ -23,10 +23,10 @@ cat $HOME/.mrmintchain/config/genesis.json | jq '.app_state["gov"]["deposit_para
 cat $HOME/.mrmintchain/config/genesis.json | jq '.app_state["mint"]["params"]["mint_denom"]="mnt"' > $HOME/.mrmintchain/config/tmp_genesis.json && mv $HOME/.mrmintchain/config/tmp_genesis.json $HOME/.mrmintchain/config/genesis.json
 
 # Allocate genesis accounts (cosmos formatted addresses)
-"$PWD"/build/mrmintchaind add-genesis-account "$("$PWD"/build/mrmintchaind keys show "$KEY" -a --keyring-backend test)" 100000000000000000000mnt,10000000000000000000stake --keyring-backend test
+"$PWD"/build/mrmintchaind add-genesis-account "$("$PWD"/build/mrmintchaind keys show "$KEY" -a --keyring-backend test)" 100000000000000000000mnt,10000000000000000000mnt --keyring-backend test
 
 # Sign genesis transaction
-"$PWD"/build/mrmintchaind gentx $KEY 10000000000000000000stake --amount=100000000000000000000mnt --keyring-backend test --chain-id $CHAINID
+"$PWD"/build/mrmintchaind gentx $KEY 10000000000000000000mnt --amount=100000000000000000000mnt --keyring-backend test --chain-id $CHAINID
 
 # Collect genesis tx
 "$PWD"/build/mrmintchaind collect-gentxs

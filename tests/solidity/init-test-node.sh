@@ -55,14 +55,14 @@ else
 fi
 
 # Allocate genesis accounts (cosmos formatted addresses)
-mrmintchaind add-genesis-account "$(mrmintchaind keys show $VAL_KEY   -a --keyring-backend test)" 1000000000000000000000mnt,1000000000000000000stake --keyring-backend test
-mrmintchaind add-genesis-account "$(mrmintchaind keys show $USER1_KEY -a --keyring-backend test)" 1000000000000000000000mnt,1000000000000000000stake --keyring-backend test
-mrmintchaind add-genesis-account "$(mrmintchaind keys show $USER2_KEY -a --keyring-backend test)" 1000000000000000000000mnt,1000000000000000000stake --keyring-backend test
-mrmintchaind add-genesis-account "$(mrmintchaind keys show $USER3_KEY -a --keyring-backend test)" 1000000000000000000000mnt,1000000000000000000stake --keyring-backend test
-mrmintchaind add-genesis-account "$(mrmintchaind keys show $USER4_KEY -a --keyring-backend test)" 1000000000000000000000mnt,1000000000000000000stake --keyring-backend test
+mrmintchaind add-genesis-account "$(mrmintchaind keys show $VAL_KEY   -a --keyring-backend test)" 1000000000000000000000mnt,1000000000000000000mnt --keyring-backend test
+mrmintchaind add-genesis-account "$(mrmintchaind keys show $USER1_KEY -a --keyring-backend test)" 1000000000000000000000mnt,1000000000000000000mnt --keyring-backend test
+mrmintchaind add-genesis-account "$(mrmintchaind keys show $USER2_KEY -a --keyring-backend test)" 1000000000000000000000mnt,1000000000000000000mnt --keyring-backend test
+mrmintchaind add-genesis-account "$(mrmintchaind keys show $USER3_KEY -a --keyring-backend test)" 1000000000000000000000mnt,1000000000000000000mnt --keyring-backend test
+mrmintchaind add-genesis-account "$(mrmintchaind keys show $USER4_KEY -a --keyring-backend test)" 1000000000000000000000mnt,1000000000000000000mnt --keyring-backend test
 
 # Sign genesis transaction
-mrmintchaind gentx $VAL_KEY 1000000000000000000stake --amount=1000000000000000000000mnt --chain-id $CHAINID --keyring-backend test
+mrmintchaind gentx $VAL_KEY 1000000000000000000mnt --amount=1000000000000000000000mnt --chain-id $CHAINID --keyring-backend test
 
 # Collect genesis tx
 mrmintchaind collect-gentxs
