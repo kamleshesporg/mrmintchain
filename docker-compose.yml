@@ -1,0 +1,73 @@
+version: "3"
+
+services:
+  mrmintchaindnode0:
+    container_name: mrmintchaindnode0
+    image: "mrmintchaind/node"
+    ports:
+      - "26657:26657"
+      - "8545:8545"
+      - "8546:8546"
+      - "8125:8125"
+    environment:
+      - ID=0
+      - LOG=${LOG:-mrmintchaind.log}
+    volumes:
+      - ./localnet-setup/node0/mrmintchaind:/mrmintchain:Z
+    networks:
+      - localnet
+    entrypoint: "bash start-docker.sh"
+
+  mrmintchaindnode1:
+    container_name: mrmintchaindnode1
+    image: "mrmintchaind/node"
+    ports:
+      - "26658:26657"
+      - "8555:8545"
+      - "8556:8546"
+      - "8126:8125"
+    environment:
+      - ID=1
+      - LOG=${LOG:-mrmintchaind.log}
+    volumes:
+      - ./localnet-setup/node1/mrmintchaind:/mrmintchain:Z
+    networks:
+      - localnet
+    entrypoint: "bash start-docker.sh"
+
+  mrmintchaindnode2:
+    container_name: mrmintchaindnode2
+    image: "mrmintchaind/node"
+    environment:
+      - ID=2
+      - LOG=${LOG:-mrmintchaind.log}
+    ports:
+      - "26659:26657"
+      - "8565:8545"
+      - "8566:8546"
+      - "8127:8125"
+    volumes:
+      - ./localnet-setup/node2/mrmintchaind:/mrmintchain:Z
+    networks:
+      - localnet
+    entrypoint: "bash start-docker.sh"
+
+  mrmintchaindnode3:
+    container_name: mrmintchaindnode3
+    image: "mrmintchaind/node"
+    environment:
+      - ID=3
+      - LOG=${LOG:-mrmintchaind.log}
+    ports:
+      - "26660:26657"
+      - "8575:8545"
+      - "8576:8546"
+      - "8128:8125"
+    volumes:
+      - ./localnet-setup/node3/mrmintchaind:/mrmintchain:Z
+    networks:
+      - localnet
+    entrypoint: "bash start-docker.sh"
+
+networks:
+  localnet:
