@@ -196,12 +196,12 @@ var (
 	allowedReceivingModAcc = map[string]bool{}
 )
 
-// var _ server.Application (*mrmintchainApp)(nil)
+// var _ server.Application (*MrmintchainApp)(nil)
 
-// mrmintchainApp implements an extended ABCI application. It is an application
+// MrmintchainApp implements an extended ABCI application. It is an application
 // that may process transactions through Ethereum's EVM running atop of
 // Tendermint consensus.
-type mrmintchainApp struct {
+type MrmintchainApp struct {
 	*baseapp.BaseApp
 
 	// encoding
@@ -261,7 +261,7 @@ func NewmrmintchainApp(
 	encodingConfig simappparams.EncodingConfig,
 	appOpts servertypes.AppOptions,
 	baseAppOptions ...func(*baseapp.BaseApp),
-) *mrmintchainApp {
+) *MrmintchainApp {
 	appCodec := encodingConfig.Codec
 	cdc := encodingConfig.Amino
 	interfaceRegistry := encodingConfig.InterfaceRegistry
@@ -303,7 +303,7 @@ func NewmrmintchainApp(
 		os.Exit(1)
 	}
 
-	app := &mrmintchainApp{
+	app := &MrmintchainApp{
 		BaseApp:           bApp,
 		cdc:               cdc,
 		appCodec:          appCodec,
@@ -653,7 +653,7 @@ func NewmrmintchainApp(
 }
 
 // use mrmintchain's custom AnteHandler
-func (app *mrmintchainApp) setAnteHandler(txConfig client.TxConfig, maxGasWanted uint64) {
+func (app *MrmintchainApp) setAnteHandler(txConfig client.TxConfig, maxGasWanted uint64) {
 	anteHandler, err := ante.NewAnteHandler(ante.HandlerOptions{
 		AccountKeeper:          app.AccountKeeper,
 		BankKeeper:             app.BankKeeper,
@@ -678,7 +678,7 @@ func (app *mrmintchainApp) setAnteHandler(txConfig client.TxConfig, maxGasWanted
 	app.SetAnteHandler(anteHandler)
 }
 
-func (app *mrmintchainApp) setPostHandler() {
+func (app *MrmintchainApp) setPostHandler() {
 	postHandler, err := posthandler.NewPostHandler(
 		posthandler.HandlerOptions{},
 	)
@@ -690,20 +690,20 @@ func (app *mrmintchainApp) setPostHandler() {
 }
 
 // Name returns the name of the App
-func (app *mrmintchainApp) Name() string { return app.BaseApp.Name() }
+func (app *MrmintchainApp) Name() string { return app.BaseApp.Name() }
 
 // BeginBlocker updates every begin block
-func (app *mrmintchainApp) BeginBlocker(ctx sdk.Context, req abci.RequestBeginBlock) abci.ResponseBeginBlock {
+func (app *MrmintchainApp) BeginBlocker(ctx sdk.Context, req abci.RequestBeginBlock) abci.ResponseBeginBlock {
 	return app.mm.BeginBlock(ctx, req)
 }
 
 // EndBlocker updates every end block
-func (app *mrmintchainApp) EndBlocker(ctx sdk.Context, req abci.RequestEndBlock) abci.ResponseEndBlock {
+func (app *MrmintchainApp) EndBlocker(ctx sdk.Context, req abci.RequestEndBlock) abci.ResponseEndBlock {
 	return app.mm.EndBlock(ctx, req)
 }
 
 // InitChainer updates at chain initialization
-func (app *mrmintchainApp) InitChainer(ctx sdk.Context, req abci.RequestInitChain) abci.ResponseInitChain {
+func (app *MrmintchainApp) InitChainer(ctx sdk.Context, req abci.RequestInitChain) abci.ResponseInitChain {
 	var genesisState simapp.GenesisState
 	if err := json.Unmarshal(req.AppStateBytes, &genesisState); err != nil {
 		panic(err)
@@ -713,12 +713,12 @@ func (app *mrmintchainApp) InitChainer(ctx sdk.Context, req abci.RequestInitChai
 }
 
 // LoadHeight loads state at a particular height
-func (app *mrmintchainApp) LoadHeight(height int64) error {
+func (app *MrmintchainApp) LoadHeight(height int64) error {
 	return app.LoadVersion(height)
 }
 
 // ModuleAccountAddrs returns all the app's module account addresses.
-func (app *mrmintchainApp) ModuleAccountAddrs() map[string]bool {
+func (app *MrmintchainApp) ModuleAccountAddrs() map[string]bool {
 	modAccAddrs := make(map[string]bool)
 	for acc := range maccPerms {
 		modAccAddrs[authtypes.NewModuleAddress(acc).String()] = true
@@ -729,7 +729,7 @@ func (app *mrmintchainApp) ModuleAccountAddrs() map[string]bool {
 
 // BlockedAddrs returns all the app's module account addresses that are not
 // allowed to receive external tokens.
-func (app *mrmintchainApp) BlockedAddrs() map[string]bool {
+func (app *MrmintchainApp) BlockedAddrs() map[string]bool {
 	blockedAddrs := make(map[string]bool)
 	for acc := range maccPerms {
 		blockedAddrs[authtypes.NewModuleAddress(acc).String()] = !allowedReceivingModAcc[acc]
@@ -738,59 +738,59 @@ func (app *mrmintchainApp) BlockedAddrs() map[string]bool {
 	return blockedAddrs
 }
 
-// LegacyAmino returns mrmintchainApp's amino codec.
+// LegacyAmino returns MrmintchainApp's amino codec.
 //
 // NOTE: This is solely to be used for testing purposes as it may be desirable
 // for modules to register their own custom testing types.
-func (app *mrmintchainApp) LegacyAmino() *codec.LegacyAmino {
+func (app *MrmintchainApp) LegacyAmino() *codec.LegacyAmino {
 	return app.cdc
 }
 
-// AppCodec returns mrmintchainApp's app codec.
+// AppCodec returns MrmintchainApp's app codec.
 //
 // NOTE: This is solely to be used for testing purposes as it may be desirable
 // for modules to register their own custom testing types.
-func (app *mrmintchainApp) AppCodec() codec.Codec {
+func (app *MrmintchainApp) AppCodec() codec.Codec {
 	return app.appCodec
 }
 
-// InterfaceRegistry returns mrmintchainApp's InterfaceRegistry
-func (app *mrmintchainApp) InterfaceRegistry() types.InterfaceRegistry {
+// InterfaceRegistry returns MrmintchainApp's InterfaceRegistry
+func (app *MrmintchainApp) InterfaceRegistry() types.InterfaceRegistry {
 	return app.interfaceRegistry
 }
 
 // GetKey returns the KVStoreKey for the provided store key.
 //
 // NOTE: This is solely to be used for testing purposes.
-func (app *mrmintchainApp) GetKey(storeKey string) *storetypes.KVStoreKey {
+func (app *MrmintchainApp) GetKey(storeKey string) *storetypes.KVStoreKey {
 	return app.keys[storeKey]
 }
 
 // GetTKey returns the TransientStoreKey for the provided store key.
 //
 // NOTE: This is solely to be used for testing purposes.
-func (app *mrmintchainApp) GetTKey(storeKey string) *storetypes.TransientStoreKey {
+func (app *MrmintchainApp) GetTKey(storeKey string) *storetypes.TransientStoreKey {
 	return app.tkeys[storeKey]
 }
 
 // GetMemKey returns the MemStoreKey for the provided mem key.
 //
 // NOTE: This is solely used for testing purposes.
-func (app *mrmintchainApp) GetMemKey(storeKey string) *storetypes.MemoryStoreKey {
+func (app *MrmintchainApp) GetMemKey(storeKey string) *storetypes.MemoryStoreKey {
 	return app.memKeys[storeKey]
 }
 
 // GetSubspace returns a param subspace for a given module name.
 //
 // NOTE: This is solely to be used for testing purposes.
-func (app *mrmintchainApp) GetSubspace(moduleName string) paramstypes.Subspace {
+func (app *MrmintchainApp) GetSubspace(moduleName string) paramstypes.Subspace {
 	subspace, _ := app.ParamsKeeper.GetSubspace(moduleName)
 	return subspace
 }
 
 // RegisterAPIRoutes registers all application module routes with the provided
 // API server.
-func (app *mrmintchainApp) RegisterAPIRoutes(apiSvr *api.Server, apiConfig config.APIConfig) {
+func (app *MrmintchainApp) RegisterAPIRoutes(apiSvr *api.Server, apiConfig config.APIConfig) {
 	clientCtx := apiSvr.ClientCtx
 	// Register new tx routes from grpc-gateway.
 	authtx.RegisterGRPCGatewayRoutes(clientCtx, apiSvr.GRPCGatewayRouter)
@@ -809,12 +809,12 @@ func (app *mrmintchainApp) RegisterAPIRoutes(apiSvr *api.Server, apiConfig confi
 }
 
 // RegisterTxService implements the Application.RegisterTxService method.
-func (app *mrmintchainApp) RegisterTxService(clientCtx client.Context) {
+func (app *MrmintchainApp) RegisterTxService(clientCtx client.Context) {
 	authtx.RegisterTxService(app.BaseApp.GRPCQueryRouter(), clientCtx, app.BaseApp.Simulate, app.interfaceRegistry)
 }
 
 // RegisterTendermintService implements the Application.RegisterTendermintService method.
-func (app *mrmintchainApp) RegisterTendermintService(clientCtx client.Context) {
+func (app *MrmintchainApp) RegisterTendermintService(clientCtx client.Context) {
 	tmservice.RegisterTendermintService(
 		clientCtx,
 		app.BaseApp.GRPCQueryRouter(),
@@ -825,7 +825,7 @@ func (app *mrmintchainApp) RegisterTendermintService(clientCtx client.Context) {
 
 // RegisterNodeService registers the node gRPC service on the provided
 // application gRPC query router.
-func (app *mrmintchainApp) RegisterNodeService(clientCtx client.Context) {
+func (app *MrmintchainApp) RegisterNodeService(clientCtx client.Context) {
 	node.RegisterNodeService(clientCtx, app.GRPCQueryRouter())
 }
 

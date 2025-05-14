@@ -39,7 +39,7 @@ import (
 )
 
 // DefaultConsensusParams defines the default Tendermint consensus params used in
-// mrmintchainApp testing.
+// MrmintchainApp testing.
 var DefaultConsensusParams = &abci.ConsensusParams{
 	Block: &abci.BlockParams{
 		MaxBytes: 200000,
@@ -57,13 +57,13 @@ var DefaultConsensusParams = &abci.ConsensusParams{
 	},
 }
 
-// Setup initializes a new mrmintchainApp. A Nop logger is set in mrmintchainApp.
-func Setup(isCheckTx bool, patchGenesis func(*mrmintchainApp, simapp.GenesisState) simapp.GenesisState) *mrmintchainApp {
+// Setup initializes a new MrmintchainApp. A Nop logger is set in MrmintchainApp.
+func Setup(isCheckTx bool, patchGenesis func(*MrmintchainApp, simapp.GenesisState) simapp.GenesisState) *MrmintchainApp {
 	return SetupWithDB(isCheckTx, patchGenesis, dbm.NewMemDB())
 }
 
-// SetupWithDB initializes a new mrmintchainApp. A Nop logger is set in mrmintchainApp.
-func SetupWithDB(isCheckTx bool, patchGenesis func(*mrmintchainApp, simapp.GenesisState) simapp.GenesisState, db dbm.DB) *mrmintchainApp {
+// SetupWithDB initializes a new MrmintchainApp. A Nop logger is set in MrmintchainApp.
+func SetupWithDB(isCheckTx bool, patchGenesis func(*MrmintchainApp, simapp.GenesisState) simapp.GenesisState, db dbm.DB) *MrmintchainApp {
 	app := NewmrmintchainApp(log.NewNopLogger(),
 		db,
 		nil,

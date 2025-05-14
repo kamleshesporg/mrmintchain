@@ -247,7 +247,7 @@ func (a appCreator) newApp(logger tmlog.Logger, db dbm.DB, traceStore io.Writer,
 		cast.ToUint32(appOpts.Get(sdkserver.FlagStateSyncSnapshotKeepRecent)),
 	)
 
-	mrmintchainApp := app.NewmrmintchainApp(
+	MrmintchainApp := app.NewmrmintchainApp(
 		logger, db, traceStore, true, skipUpgradeHeights,
 		cast.ToString(appOpts.Get(flags.FlagHome)),
 		cast.ToUint(appOpts.Get(sdkserver.FlagInvCheckPeriod)),
@@ -266,7 +266,7 @@ func (a appCreator) newApp(logger tmlog.Logger, db dbm.DB, traceStore io.Writer,
 		baseapp.SetIAVLDisableFastNode(cast.ToBool(appOpts.Get(sdkserver.FlagDisableIAVLFastNode))),
 	)
 
-	return mrmintchainApp
+	return MrmintchainApp
 }
 
 // appExport creates a new simapp (optionally at a given height)
@@ -275,21 +275,21 @@ func (a appCreator) appExport(
 	logger tmlog.Logger, db dbm.DB, traceStore io.Writer, height int64, forZeroHeight bool, jailAllowedAddrs []string,
 	appOpts servertypes.AppOptions,
 ) (servertypes.ExportedApp, error) {
-	var mrmintchainApp *app.mrmintchainApp
+	var MrmintchainApp *app.MrmintchainApp
 	homePath, ok := appOpts.Get(flags.FlagHome).(string)
 	if !ok || homePath == "" {
 		return servertypes.ExportedApp{}, errors.New("application home not set")
 	}
 
 	if height != -1 {
-		mrmintchainApp = app.NewmrmintchainApp(logger, db, traceStore, false, map[int64]bool{}, "", uint(1), a.encCfg, appOpts)
+		MrmintchainApp = app.NewmrmintchainApp(logger, db, traceStore, false, map[int64]bool{}, "", uint(1), a.encCfg, appOpts)
 
-		if err := mrmintchainApp.LoadHeight(height); err != nil {
+		if err := MrmintchainApp.LoadHeight(height); err != nil {
 			return servertypes.ExportedApp{}, err
 		}
 	} else {
-		mrmintchainApp = app.NewmrmintchainApp(logger, db, traceStore, true, map[int64]bool{}, "", uint(1), a.encCfg, appOpts)
+		MrmintchainApp = app.NewmrmintchainApp(logger, db, traceStore, true, map[int64]bool{}, "", uint(1), a.encCfg, appOpts)
 	}
 
-	return mrmintchainApp.ExportAppStateAndValidators(forZeroHeight, jailAllowedAddrs)
+	return MrmintchainApp.ExportAppStateAndValidators(forZeroHeight, jailAllowedAddrs)
 }

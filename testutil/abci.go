@@ -14,7 +14,7 @@ import (
 //  2. DeliverTx
 //  3. EndBlock
 //  4. Commit
-func Commit(ctx sdk.Context, app *app.mrmintchainApp, t time.Duration, vs *tmtypes.ValidatorSet) (sdk.Context, error) {
+func Commit(ctx sdk.Context, app *app.MrmintchainApp, t time.Duration, vs *tmtypes.ValidatorSet) (sdk.Context, error) {
 	header := ctx.BlockHeader()
 
 	if vs != nil {

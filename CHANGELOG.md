@@ -806,7 +806,7 @@ Ref: https://keepachangelog.com/en/1.0.0/
 - (evm) [tharsis#181](https://github.com/cosmos/mrmintchain/issues/181) Updated EVM module to the recommended module structure.
 - (app) [tharsis#188](https://github.com/cosmos/mrmintchain/issues/186) Misc cleanup:
   - (evm) Rename `EthereumTxMsg` --> `MsgEthereumTx` and `EmintMsg` --> `Msgmrmintchain` for consistency with SDK standards
-  - Updated integration and unit tests to use `mrmintchainApp` as testing suite
+  - Updated integration and unit tests to use `MrmintchainApp` as testing suite
   - Use expected `Keeper` interface for `AccountKeeper`
   - Replaced `count` type in keeper with `int`
   - Add SDK events for transactions
