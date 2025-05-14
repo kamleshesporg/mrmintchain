@@ -38,11 +38,11 @@ mrmintchaind keys add %KEY% --keyring-backend %KEYRING% --algo %KEYALGO%
 rem Set moniker and chain-id for mrmintchain (Moniker can be anything, chain-id must be an integer)
 mrmintchaind init %MONIKER% --chain-id %CHAINID% 
 
-rem Change parameter token denominations to aphoton
-cat %GENESIS% | jq ".app_state[\"staking\"][\"params\"][\"bond_denom\"]=\"aphoton\""   >   %TMPGENESIS% && move %TMPGENESIS% %GENESIS%
-cat %GENESIS% | jq ".app_state[\"crisis\"][\"constant_fee\"][\"denom\"]=\"aphoton\"" > %TMPGENESIS% && move %TMPGENESIS% %GENESIS%
-cat %GENESIS% | jq ".app_state[\"gov\"][\"deposit_params\"][\"min_deposit\"][0][\"denom\"]=\"aphoton\"" > %TMPGENESIS% && move %TMPGENESIS% %GENESIS%
-cat %GENESIS% | jq ".app_state[\"mint\"][\"params\"][\"mint_denom\"]=\"aphoton\"" > %TMPGENESIS% && move %TMPGENESIS% %GENESIS%
+rem Change parameter token denominations to mnt
+cat %GENESIS% | jq ".app_state[\"staking\"][\"params\"][\"bond_denom\"]=\"mnt\""   >   %TMPGENESIS% && move %TMPGENESIS% %GENESIS%
+cat %GENESIS% | jq ".app_state[\"crisis\"][\"constant_fee\"][\"denom\"]=\"mnt\"" > %TMPGENESIS% && move %TMPGENESIS% %GENESIS%
+cat %GENESIS% | jq ".app_state[\"gov\"][\"deposit_params\"][\"min_deposit\"][0][\"denom\"]=\"mnt\"" > %TMPGENESIS% && move %TMPGENESIS% %GENESIS%
+cat %GENESIS% | jq ".app_state[\"mint\"][\"params\"][\"mint_denom\"]=\"mnt\"" > %TMPGENESIS% && move %TMPGENESIS% %GENESIS%
 
 rem increase block time (?)
 cat %GENESIS% | jq ".consensus_params[\"block\"][\"time_iota_ms\"]=\"30000\"" > %TMPGENESIS% && move %TMPGENESIS% %GENESIS%
@@ -54,10 +54,10 @@ rem setup
 sed -i "s/create_empty_blocks = true/create_empty_blocks = false/g" %ETHCONFIG%
 
 rem Allocate genesis accounts (cosmos formatted addresses)
-mrmintchaind add-genesis-account %KEY% 100000000000000000000000000aphoton --keyring-backend %KEYRING%
+mrmintchaind add-genesis-account %KEY% 100000000000000000000000000mnt --keyring-backend %KEYRING%
 
 rem Sign genesis transaction
-mrmintchaind gentx %KEY% 1000000000000000000000aphoton --keyring-backend %KEYRING% --chain-id %CHAINID%
+mrmintchaind gentx %KEY% 1000000000000000000000mnt --keyring-backend %KEYRING% --chain-id %CHAINID%
 
 rem Collect genesis tx
 mrmintchaind collect-gentxs
@@ -68,4 +68,4 @@ mrmintchaind validate-genesis
 
 
 rem Start the node (remove the --pruning=nothing flag if historical queries are not needed)
-mrmintchaind start --pruning=nothing %TRACE% --log_level %LOGLEVEL% --minimum-gas-prices=0.0001aphoton
+mrmintchaind start --pruning=nothing %TRACE% --log_level %LOGLEVEL% --minimum-gas-prices=0.0001mnt

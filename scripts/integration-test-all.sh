@@ -74,8 +74,10 @@ init_func() {
     "$PWD"/build/mrmintchaind init $MONIKER --chain-id $CHAINID --home "$DATA_DIR$i"
     # Set gas limit in genesis
     cat $DATA_DIR$i/config/genesis.json | jq '.consensus_params["block"]["max_gas"]="10000000"' > $DATA_DIR$i/config/tmp_genesis.json && mv $DATA_DIR$i/config/tmp_genesis.json $DATA_DIR$i/config/genesis.json
+    cat $DATA_DIR$i/config/genesis.json | jq '.app_state["feemarket"]["block_gas"]="20000000"' > $DATA_DIR$i/config/tmp_genesis.json && mv $DATA_DIR$i/config/tmp_genesis.json $DATA_DIR$i/config/genesis.json
+
     "$PWD"/build/mrmintchaind add-genesis-account \
-    "$("$PWD"/build/mrmintchaind keys show "$KEY$i" --keyring-backend test -a --home "$DATA_DIR$i")" 1000000000000000000aphoton,1000000000000000000stake \
+    "$("$PWD"/build/mrmintchaind keys show "$KEY$i" --keyring-backend test -a --home "$DATA_DIR$i")" 1000000000000000000mnt,1000000000000000000stake \
     --keyring-backend test --home "$DATA_DIR$i"
     "$PWD"/build/mrmintchaind gentx "$KEY$i" 1000000000000000000stake --chain-id $CHAINID --keyring-backend test --home "$DATA_DIR$i"
     "$PWD"/build/mrmintchaind collect-gentxs --home "$DATA_DIR$i"

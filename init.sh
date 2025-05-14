@@ -27,20 +27,22 @@ mrmintchaind keys add $KEY --keyring-backend $KEYRING --algo $KEYALGO
 # Set moniker and chain-id for mrmintchain (Moniker can be anything, chain-id must be an integer)
 mrmintchaind init $MONIKER --chain-id $CHAINID
 
-# Change parameter token denominations to aphoton
-cat $HOME/.mrmintchaind/config/genesis.json | jq '.app_state["staking"]["params"]["bond_denom"]="aphoton"' > $HOME/.mrmintchaind/config/tmp_genesis.json && mv $HOME/.mrmintchaind/config/tmp_genesis.json $HOME/.mrmintchaind/config/genesis.json
-cat $HOME/.mrmintchaind/config/genesis.json | jq '.app_state["crisis"]["constant_fee"]["denom"]="aphoton"' > $HOME/.mrmintchaind/config/tmp_genesis.json && mv $HOME/.mrmintchaind/config/tmp_genesis.json $HOME/.mrmintchaind/config/genesis.json
-cat $HOME/.mrmintchaind/config/genesis.json | jq '.app_state["gov"]["deposit_params"]["min_deposit"][0]["denom"]="aphoton"' > $HOME/.mrmintchaind/config/tmp_genesis.json && mv $HOME/.mrmintchaind/config/tmp_genesis.json $HOME/.mrmintchaind/config/genesis.json
-cat $HOME/.mrmintchaind/config/genesis.json | jq '.app_state["mint"]["params"]["mint_denom"]="aphoton"' > $HOME/.mrmintchaind/config/tmp_genesis.json && mv $HOME/.mrmintchaind/config/tmp_genesis.json $HOME/.mrmintchaind/config/genesis.json
+# Change parameter token denominations to mnt
+cat $HOME/.mrmintchaind/config/genesis.json | jq '.app_state["staking"]["params"]["bond_denom"]="mnt"' > $HOME/.mrmintchaind/config/tmp_genesis.json && mv $HOME/.mrmintchaind/config/tmp_genesis.json $HOME/.mrmintchaind/config/genesis.json
+cat $HOME/.mrmintchaind/config/genesis.json | jq '.app_state["crisis"]["constant_fee"]["denom"]="mnt"' > $HOME/.mrmintchaind/config/tmp_genesis.json && mv $HOME/.mrmintchaind/config/tmp_genesis.json $HOME/.mrmintchaind/config/genesis.json
+cat $HOME/.mrmintchaind/config/genesis.json | jq '.app_state["gov"]["deposit_params"]["min_deposit"][0]["denom"]="mnt"' > $HOME/.mrmintchaind/config/tmp_genesis.json && mv $HOME/.mrmintchaind/config/tmp_genesis.json $HOME/.mrmintchaind/config/genesis.json
+cat $HOME/.mrmintchaind/config/genesis.json | jq '.app_state["mint"]["params"]["mint_denom"]="mnt"' > $HOME/.mrmintchaind/config/tmp_genesis.json && mv $HOME/.mrmintchaind/config/tmp_genesis.json $HOME/.mrmintchaind/config/genesis.json
 
 # Set gas limit in genesis
 cat $HOME/.mrmintchaind/config/genesis.json | jq '.consensus_params["block"]["max_gas"]="20000000"' > $HOME/.mrmintchaind/config/tmp_genesis.json && mv $HOME/.mrmintchaind/config/tmp_genesis.json $HOME/.mrmintchaind/config/genesis.json
 
+cat $HOME/.mrmintchaind/config/genesis.json | jq '.app_state["feemarket"]["block_gas"]="20000000"' > $HOME/.mrmintchaind/config/tmp_genesis.json && mv $HOME/.mrmintchaind/config/tmp_genesis.json $HOME/.mrmintchaind/config/genesis.json
+
 # Allocate genesis accounts (cosmos formatted addresses)
-mrmintchaind add-genesis-account $KEY 100000000000000000000000000aphoton --keyring-backend $KEYRING
+mrmintchaind add-genesis-account $KEY 100000000000000000000000000mnt --keyring-backend $KEYRING
 
 # Sign genesis transaction
-mrmintchaind gentx $KEY 1000000000000000000000aphoton --keyring-backend $KEYRING --chain-id $CHAINID
+mrmintchaind gentx $KEY 1000000000000000000000mnt --keyring-backend $KEYRING --chain-id $CHAINID
 
 # Collect genesis tx
 mrmintchaind collect-gentxs
@@ -87,4 +89,4 @@ if [[ $1 == "pending" ]]; then
 fi
 
 # Start the node (remove the --pruning=nothing flag if historical queries are not needed)
-mrmintchaind start --metrics --pruning=nothing --evm.tracer=json $TRACE --log_level $LOGLEVEL --minimum-gas-prices=0.0001aphoton --json-rpc.api eth,txpool,personal,net,debug,web3,miner --api.enable
+mrmintchaind start --metrics --pruning=nothing --evm.tracer=json $TRACE --log_level $LOGLEVEL --minimum-gas-prices=0.0001mnt --json-rpc.api eth,txpool,personal,net,debug,web3,miner --api.enable

@@ -775,7 +775,7 @@ Ref: https://keepachangelog.com/en/1.0.0/
 
 ### API Breaking
 
-- (types) [tharsis#503](https://github.com/cosmos/mrmintchain/pull/503) The `types.DenomDefault` constant for `"aphoton"` has been renamed to `types.AttoPhoton`.
+- (types) [tharsis#503](https://github.com/cosmos/mrmintchain/pull/503) The `types.DenomDefault` constant for `"mnt"` has been renamed to `types.AttoPhoton`.
 
 ### Improvements
 
@@ -786,13 +786,13 @@ Ref: https://keepachangelog.com/en/1.0.0/
 - (app) [tharsis#471](https://github.com/cosmos/mrmintchain/pull/471) Add `x/upgrade` module for managing software updates.
 - (evm) [tharsis#458](https://github.com/cosmos/mrmintchain/pull/458) Define parameter for token denomination used for the EVM module.
 - (evm) [tharsis#443](https://github.com/cosmos/mrmintchain/issues/443) Support custom Ethereum `ChainConfig` params.
-- (types) [tharsis#434](https://github.com/cosmos/mrmintchain/issues/434) Update default denomination to Atto Photon (`aphoton`).
+- (types) [tharsis#434](https://github.com/cosmos/mrmintchain/issues/434) Update default denomination to Atto Photon (`mnt`).
 - (types) [tharsis#515](https://github.com/cosmos/mrmintchain/pull/515) Update minimum gas price to be 1.
 
 ### Bug Fixes
 
 - (ante) [tharsis#525](https://github.com/cosmos/mrmintchain/pull/525) Add message validation decorator to `AnteHandler` for `MsgEthereumTx`.
-- (types) [tharsis#507](https://github.com/cosmos/mrmintchain/pull/507) Fix hardcoded `aphoton` on `EthAccount` balance getter and setter.
+- (types) [tharsis#507](https://github.com/cosmos/mrmintchain/pull/507) Fix hardcoded `mnt` on `EthAccount` balance getter and setter.
 - (types) [tharsis#501](https://github.com/cosmos/mrmintchain/pull/501) Fix bech32 encoding error by using the compressed ethereum secp256k1 public key.
 - (evm) [tharsis#496](https://github.com/cosmos/mrmintchain/pull/496) Fix bugs on `journal.revert` and `CommitStateDB.Copy`.
 - (types) [tharsis#480](https://github.com/cosmos/mrmintchain/pull/480) Update [BIP44](https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki) coin type to `60` to satisfy [EIP84](https://github.com/ethereum/EIPs/issues/84).
