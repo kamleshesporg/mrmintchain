@@ -34,7 +34,7 @@ func (suite AnteTestSuite) TestGasWantedDecorator() {
 					ToAddress:   "evmos1dx67l23hz9l0k9hcher8xz04uj7wf3yu26l2yn",
 					Amount:      sdk.Coins{sdk.Coin{Amount: sdkmath.NewInt(10), Denom: denom}},
 				}
-				txBuilder := suite.CreateTestCosmosTxBuilder(sdkmath.NewInt(10), "stake", &testMsg)
+				txBuilder := suite.CreateTestCosmosTxBuilder(sdkmath.NewInt(10), "mnt", &testMsg)
 				return txBuilder.GetTx()
 			},
 		},

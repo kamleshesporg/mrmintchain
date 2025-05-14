@@ -17,7 +17,7 @@ make build-mrmintchain
 "$PWD"/build/mrmintchaind init $MONIKER --chain-id $CHAINID
 
 # Change parameter token denominations to mnt
-cat $HOME/.mrmintchain/config/genesis.json | jq '.app_state["staking"]["params"]["bond_denom"]="stake"' > $HOME/.mrmintchain/config/tmp_genesis.json && mv $HOME/.mrmintchain/config/tmp_genesis.json $HOME/.mrmintchain/config/genesis.json
+cat $HOME/.mrmintchain/config/genesis.json | jq '.app_state["staking"]["params"]["bond_denom"]="mnt"' > $HOME/.mrmintchain/config/tmp_genesis.json && mv $HOME/.mrmintchain/config/tmp_genesis.json $HOME/.mrmintchain/config/genesis.json
 cat $HOME/.mrmintchain/config/genesis.json | jq '.app_state["crisis"]["constant_fee"]["denom"]="mnt"' > $HOME/.mrmintchain/config/tmp_genesis.json && mv $HOME/.mrmintchain/config/tmp_genesis.json $HOME/.mrmintchain/config/genesis.json
 cat $HOME/.mrmintchain/config/genesis.json | jq '.app_state["gov"]["deposit_params"]["min_deposit"][0]["denom"]="mnt"' > $HOME/.mrmintchain/config/tmp_genesis.json && mv $HOME/.mrmintchain/config/tmp_genesis.json $HOME/.mrmintchain/config/genesis.json
 cat $HOME/.mrmintchain/config/genesis.json | jq '.app_state["mint"]["params"]["mint_denom"]="mnt"' > $HOME/.mrmintchain/config/tmp_genesis.json && mv $HOME/.mrmintchain/config/tmp_genesis.json $HOME/.mrmintchain/config/genesis.json
