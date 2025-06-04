@@ -41,8 +41,8 @@ import (
 	genutiltypes "github.com/cosmos/cosmos-sdk/x/genutil/types"
 	govtypes "github.com/cosmos/cosmos-sdk/x/gov/types"
 	govv1 "github.com/cosmos/cosmos-sdk/x/gov/types/v1beta1"
-	mintypes "github.com/cosmos/cosmos-sdk/x/mint/types"
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
+	mintypes "github.com/kamleshesporg/mrmintchain/x/mint/types"
 
 	"github.com/kamleshesporg/mrmintchain/server"
 	evmtypes "github.com/kamleshesporg/mrmintchain/x/evm/types"
