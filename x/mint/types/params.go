@@ -5,11 +5,21 @@ import (
 	"fmt"
 	"strings"
 
-	"sigs.k8s.io/yaml"
-
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	paramtypes "github.com/cosmos/cosmos-sdk/x/params/types"
 )
+
+// type Params struct {
+// 	MintDenom           string  `json:"mint_denom" yaml:"mint_denom"`
+// 	InflationRateChange sdk.Dec `json:"inflation_rate_change" yaml:"inflation_rate_change"`
+// 	InflationMax        sdk.Dec `json:"inflation_max" yaml:"inflation_max"`
+// 	InflationMin        sdk.Dec `json:"inflation_min" yaml:"inflation_min"`
+// 	GoalBonded          sdk.Dec `json:"goal_bonded" yaml:"goal_bonded"`
+// 	BlocksPerYear       uint64  `json:"blocks_per_year" yaml:"blocks_per_year"`
+
+// 	HalvingInterval uint64 `json:"halving_interval" yaml:"halving_interval"`
+// 	MaxRewardTokens uint64 `json:"max_reward_tokens" yaml:"max_reward_tokens"`
+// }
 
 // Parameter store keys
 var (
@@ -19,6 +29,8 @@ var (
 	KeyInflationMin        = []byte("InflationMin")
 	KeyGoalBonded          = []byte("GoalBonded")
 	KeyBlocksPerYear       = []byte("BlocksPerYear")
+	// KeyHalvingInterval     = []byte("HalvingInterval")
+	KeyMaxRewardTokens = []byte("MaxRewardTokens")
 )
 
 // ParamTable for minting module.
@@ -28,6 +40,7 @@ func ParamKeyTable() paramtypes.KeyTable {
 
 func NewParams(
 	mintDenom string, inflationRateChange, inflationMax, inflationMin, goalBonded sdk.Dec, blocksPerYear uint64,
+	halvingInterval uint64, maxRewardTokens sdk.Dec,
 ) Params {
 	return Params{
 		MintDenom:           mintDenom,
@@ -36,6 +49,8 @@ func NewParams(
 		InflationMin:        inflationMin,
 		GoalBonded:          goalBonded,
 		BlocksPerYear:       blocksPerYear,
+		HalvingInterval:     halvingInterval,
+		MaxRewardTokens:     maxRewardTokens,
 	}
 }
 
@@ -43,11 +58,13 @@ func NewParams(
 func DefaultParams() Params {
 	return Params{
 		MintDenom:           sdk.DefaultBondDenom,
-		InflationRateChange: sdk.NewDecWithPrec(13, 2),
-		InflationMax:        sdk.NewDecWithPrec(20, 2),
-		InflationMin:        sdk.NewDecWithPrec(7, 2),
+		InflationRateChange: sdk.NewDecWithPrec(0, 2),
+		InflationMax:        sdk.NewDecWithPrec(0, 2),
+		InflationMin:        sdk.NewDecWithPrec(0, 2),
 		GoalBonded:          sdk.NewDecWithPrec(67, 2),
 		BlocksPerYear:       uint64(60 * 60 * 8766 / 5), // assuming 5 second block times
+		HalvingInterval:     50,
+		MaxRewardTokens:     sdk.NewDecWithPrec(10000, 0),
 	}
 }
 
@@ -77,17 +94,22 @@ func (p Params) Validate() error {
 			p.InflationMax, p.InflationMin,
 		)
 	}
+	if p.MaxRewardTokens.IsNegative() {
+		return fmt.Errorf("max reward tokens must not be negative")
+	}
+	if p.HalvingInterval == 0 {
+		return fmt.Errorf("halving interval must be greater than zero")
+	}
 
 	return nil
 }
 
 // String implements the Stringer interface.
-func (p Params) String() string {
-	out, _ := yaml.Marshal(p)
-	return string(out)
-}
+// func (p Params) String() string {
+// 	out, _ := yaml.Marshal(p)
+// 	return string(out)
+// }
 
-// Implements params.ParamSet
 func (p *Params) ParamSetPairs() paramtypes.ParamSetPairs {
 	return paramtypes.ParamSetPairs{
 		paramtypes.NewParamSetPair(KeyMintDenom, &p.MintDenom, validateMintDenom),
@@ -96,6 +118,9 @@ func (p *Params) ParamSetPairs() paramtypes.ParamSetPairs {
 		paramtypes.NewParamSetPair(KeyInflationMin, &p.InflationMin, validateInflationMin),
 		paramtypes.NewParamSetPair(KeyGoalBonded, &p.GoalBonded, validateGoalBonded),
 		paramtypes.NewParamSetPair(KeyBlocksPerYear, &p.BlocksPerYear, validateBlocksPerYear),
+
+		paramtypes.NewParamSetPair(KeyHalvingInterval, &p.HalvingInterval, validateHalvingInterval),
+		paramtypes.NewParamSetPair(KeyMaxRewardTokens, &p.MaxRewardTokens, validateMaxRewardTokens),
 	}
 }
 
@@ -189,5 +214,27 @@ func validateBlocksPerYear(i interface{}) error {
 		return fmt.Errorf("blocks per year must be positive: %d", v)
 	}
 
+	return nil
+}
+
+func validateHalvingInterval(i interface{}) error {
+	v, ok := i.(uint64)
+	if !ok {
+		return fmt.Errorf("invalid parameter type: %T", i)
+	}
+	if v == 0 {
+		return fmt.Errorf("halving interval must be positive: %d", v)
+	}
+	return nil
+}
+
+func validateMaxRewardTokens(i interface{}) error {
+	v, ok := i.(sdk.Dec)
+	if !ok {
+		return fmt.Errorf("invalid parameter type: %T", i)
+	}
+	if v.IsNegative() {
+		return fmt.Errorf("max reward tokens cannot be negative: %s", v)
+	}
 	return nil
 }

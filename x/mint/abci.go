@@ -6,50 +6,50 @@
 // 	abci "github.com/tendermint/tendermint/abci/types"
 // )
 
-// // // BeginBlocker mints new tokens for the previous block.
-// // func BeginBlocker(ctx sdk.Context, k keeper.Keeper, ic types.InflationCalculationFn) {
-// // 	defer telemetry.ModuleMeasureSince(types.ModuleName, time.Now(), telemetry.MetricKeyBeginBlocker)
+// // BeginBlocker mints new tokens for the previous block.
+// func BeginBlocker(ctx sdk.Context, k keeper.Keeper, ic types.InflationCalculationFn) {
+// 	defer telemetry.ModuleMeasureSince(types.ModuleName, time.Now(), telemetry.MetricKeyBeginBlocker)
 
-// // 	// fetch stored minter & params
-// // 	minter := k.GetMinter(ctx)
-// // 	params := k.GetParams(ctx)
+// 	// fetch stored minter & params
+// 	minter := k.GetMinter(ctx)
+// 	params := k.GetParams(ctx)
 
-// // 	// recalculate inflation rate
-// // 	totalStakingSupply := k.StakingTokenSupply(ctx)
-// // 	bondedRatio := k.BondedRatio(ctx)
-// // 	minter.Inflation = ic(ctx, minter, params, bondedRatio)
-// // 	minter.AnnualProvisions = minter.NextAnnualProvisions(params, totalStakingSupply)
-// // 	k.SetMinter(ctx, minter)
+// 	// recalculate inflation rate
+// 	totalStakingSupply := k.StakingTokenSupply(ctx)
+// 	bondedRatio := k.BondedRatio(ctx)
+// 	minter.Inflation = ic(ctx, minter, params, bondedRatio)
+// 	minter.AnnualProvisions = minter.NextAnnualProvisions(params, totalStakingSupply)
+// 	k.SetMinter(ctx, minter)
 
-// // 	// mint coins, update supply
-// // 	mintedCoin := minter.BlockProvision(params)
-// // 	mintedCoins := sdk.NewCoins(mintedCoin)
+// 	// mint coins, update supply
+// 	mintedCoin := minter.BlockProvision(params)
+// 	mintedCoins := sdk.NewCoins(mintedCoin)
 
-// // 	err := k.MintCoins(ctx, mintedCoins)
-// // 	if err != nil {
-// // 		panic(err)
-// // 	}
+// 	err := k.MintCoins(ctx, mintedCoins)
+// 	if err != nil {
+// 		panic(err)
+// 	}
 
-// // 	// send the minted coins to the fee collector account
-// // 	err = k.AddCollectedFees(ctx, mintedCoins)
-// // 	if err != nil {
-// // 		panic(err)
-// // 	}
+// 	// send the minted coins to the fee collector account
+// 	err = k.AddCollectedFees(ctx, mintedCoins)
+// 	if err != nil {
+// 		panic(err)
+// 	}
 
-// // 	if mintedCoin.Amount.IsInt64() {
-// // 		defer telemetry.ModuleSetGauge(types.ModuleName, float32(mintedCoin.Amount.Int64()), "minted_tokens")
-// // 	}
+// 	if mintedCoin.Amount.IsInt64() {
+// 		defer telemetry.ModuleSetGauge(types.ModuleName, float32(mintedCoin.Amount.Int64()), "minted_tokens")
+// 	}
 
-// // 	ctx.EventManager().EmitEvent(
-// // 		sdk.NewEvent(
-// // 			types.EventTypeMint,
-// // 			sdk.NewAttribute(types.AttributeKeyBondedRatio, bondedRatio.String()),
-// // 			sdk.NewAttribute(types.AttributeKeyInflation, minter.Inflation.String()),
-// // 			sdk.NewAttribute(types.AttributeKeyAnnualProvisions, minter.AnnualProvisions.String()),
-// // 			sdk.NewAttribute(sdk.AttributeKeyAmount, mintedCoin.Amount.String()),
-// // 		),
-// // 	)
-// // }
+// 	ctx.EventManager().EmitEvent(
+// 		sdk.NewEvent(
+// 			types.EventTypeMint,
+// 			sdk.NewAttribute(types.AttributeKeyBondedRatio, bondedRatio.String()),
+// 			sdk.NewAttribute(types.AttributeKeyInflation, minter.Inflation.String()),
+// 			sdk.NewAttribute(types.AttributeKeyAnnualProvisions, minter.AnnualProvisions.String()),
+// 			sdk.NewAttribute(sdk.AttributeKeyAmount, mintedCoin.Amount.String()),
+// 		),
+// 	)
+// }
 
 // func BeginBlocker(ctx sdk.Context, k keeper.Keeper, _ abci.RequestBeginBlock) {
 // 	height := ctx.BlockHeight()
@@ -89,12 +89,17 @@
 package mint
 
 import (
+	"fmt"
+
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	types "github.com/cosmos/cosmos-sdk/types"
 	"github.com/kamleshesporg/mrmintchain/x/mint/keeper"
 )
 
-func BeginBlocker(ctx types.Context, k keeper.Keeper) {
+func BeginBlocker(ctx sdk.Context, k keeper.Keeper) {
+	// func BeginBlocker(ctx types.Context, k keeper.Keeper) {
+	fmt.Println("BeginBlocker called222222222")
+	fmt.Println("💥 BeginBlocker actually executing")
+
 	blockHeight := ctx.BlockHeight()
 
 	maxRewardSupply := k.GetMaxRewardSupply(ctx)
@@ -107,9 +112,17 @@ func BeginBlocker(ctx types.Context, k keeper.Keeper) {
 		return
 	}
 
+	fmt.Printf("\nKkkkkkkkkkkkkkkkkkkkkk  [rewardPerBlock]=> %d", rewardPerBlock.Int64())
+	fmt.Printf("\nKkkkkkkkkkkkkkkkkkkkkk  [halvingInterval]=> %d", halvingInterval)
+	fmt.Printf("\nKkkkkkkkkkkkkkkkkkkkkk  [maxRewardSupply]=> %d", maxRewardSupply.Int64())
+	fmt.Printf("\nKkkkkkkkkkkkkkkkkkkkkk  [totalMinted]=> %d", totalMinted.Int64())
+	fmt.Printf("\nKkkkkkkkkkkkkkkkkkkkkk  [blockHeight]=> %d", blockHeight)
+	fmt.Println()
+
 	// Halving logic
 	if blockHeight > 0 && blockHeight%halvingInterval == 0 {
 		newReward := rewardPerBlock.QuoRaw(2)
+		fmt.Printf("Kkkkkkkkkkkkkkkkkkkkkk--- newReward=> %d", newReward)
 		if newReward.IsZero() {
 			newReward = sdk.NewInt(1) // minimum reward to avoid zero
 		}

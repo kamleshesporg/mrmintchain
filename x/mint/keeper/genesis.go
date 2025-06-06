@@ -21,7 +21,14 @@ func (keeper Keeper) InitGenesis(ctx sdk.Context, ak types.AccountKeeper, data *
 		InflationMin:        data.Params.InflationMin,
 		GoalBonded:          data.Params.GoalBonded,
 		BlocksPerYear:       data.Params.BlocksPerYear,
+		HalvingInterval:     data.Params.HalvingInterval,
+		MaxRewardTokens:     data.Params.MaxRewardTokens,
 	}) // not cosmos-sdk Params
+
+	// keeper.SetRewardPerBlock(ctx, data.Minter.RewardPerBlock)
+	// keeper.SetHalvingInterval(ctx, data.Params.HalvingInterval)
+	// keeper.SetMaxRewardSupply(ctx, data.Params.MaxRewardTokens)
+	// keeper.SetTotalMinted(ctx, sdk.NewDecWithPrec(0, 0)) // usually starts at zero
 
 	ak.GetModuleAccount(ctx, types.ModuleName)
 }

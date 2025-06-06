@@ -2,6 +2,7 @@ package keeper
 
 import (
 	"encoding/binary"
+	"fmt"
 	"math/big"
 
 	"cosmossdk.io/math"
@@ -107,7 +108,6 @@ func (k Keeper) MintCoins(ctx sdk.Context, newCoins sdk.Coins) error {
 		// skip as no coins need to be minted
 		return nil
 	}
-
 	return k.bankKeeper.MintCoins(ctx, types.ModuleName, newCoins)
 }
 
@@ -158,9 +158,11 @@ func (k Keeper) SetTotalMinted(ctx sdk.Context, total sdk.Int) {
 }
 func (k Keeper) GetHalvingInterval(ctx sdk.Context) int64 {
 	bz := k.store(ctx).Get(types.KeyHalvingInterval)
+	fmt.Printf("1111 GetHalvingInterval =>%d", bz)
 	if bz == nil {
-		return 210000 // default interval in blocks
+		return 20 // default interval in blocks
 	}
+	fmt.Printf("2222 GetHalvingInterval =>%d", bz)
 	return int64(binary.BigEndian.Uint64(bz))
 }
 

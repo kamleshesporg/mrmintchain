@@ -1,0 +1,55 @@
+syntax = "proto3";
+
+package mint;
+
+option go_package = "github.com/kamleshesporg/mrmintchain/x/mint/types";
+
+// Params defines the parameters for the mint module.
+message Params {
+  string mint_denom = 1;
+  string inflation_rate_change = 2;
+  string inflation_max = 3;
+  string inflation_min = 4;
+  string goal_bonded = 5;
+  uint64 blocks_per_year = 6;
+}
+
+// Minter represents the current state of inflation.
+message Minter {
+  string inflation = 1;
+  string annual_provisions = 2;
+}
+
+// GenesisState defines the mint module's genesis state.
+message GenesisState {
+  Minter minter = 1;
+  Params params = 2;
+}
+
+// QueryParamsRequest is the request type for the Query/Params RPC method.
+message QueryParamsRequest {}
+
+message QueryParamsResponse {
+  Params params = 1;
+}
+
+// QueryInflationRequest is the request type for the Query/Inflation RPC method.
+message QueryInflationRequest {}
+
+message QueryInflationResponse {
+  string inflation = 1;
+}
+
+// QueryAnnualProvisionsRequest is the request type for the Query/AnnualProvisions RPC method.
+message QueryAnnualProvisionsRequest {}
+
+message QueryAnnualProvisionsResponse {
+  string annual_provisions = 1;
+}
+
+// Query defines the gRPC service interface.
+service Query {
+  rpc Params(QueryParamsRequest) returns (QueryParamsResponse);
+  rpc Inflation(QueryInflationRequest) returns (QueryInflationResponse);
+  rpc AnnualProvisions(QueryAnnualProvisionsRequest) returns (QueryAnnualProvisionsResponse);
+}

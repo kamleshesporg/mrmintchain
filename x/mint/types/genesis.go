@@ -4,6 +4,12 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
+// GenesisState defines the mint module's genesis state.
+// type GenesisState struct {
+// 	Minter Minter `json:"minter" yaml:"minter"`
+// 	Params Params `json:"params" yaml:"params"`
+// }
+
 // InflationCalculationFn defines the function required to calculate inflation rate during
 // BeginBlock. It receives the minter and params stored in the keeper, along with the current
 // bondedRatio and returns the newly calculated inflation rate.
@@ -19,25 +25,35 @@ func DefaultInflationCalculationFn(_ sdk.Context, minter Minter, params Params, 
 // NewGenesisState creates a new GenesisState object
 func NewGenesisState(minter Minter, params Params) *GenesisState {
 	return &GenesisState{
-		Minter: minter,
-		Params: params,
+		Minter: &minter,
+		Params: &params,
 	}
 }
 
-// DefaultGenesisState creates a default GenesisState object
+// // DefaultGenesisState creates a default GenesisState object
+// func DefaultGenesisState() *GenesisState {
+// 	return &GenesisState{
+// 		Minter: DefaultInitialMinter(),
+// 		Params: DefaultParams(),
+// 	}
+// }
+
 func DefaultGenesisState() *GenesisState {
+	m := DefaultInitialMinter()
+	p := DefaultParams()
 	return &GenesisState{
-		Minter: DefaultInitialMinter(),
-		Params: DefaultParams(),
+		Minter: &m,
+		Params: &p,
 	}
 }
 
 // ValidateGenesis validates the provided genesis state to ensure the
-// expected invariants holds.
+// expected invariants hold.
 func ValidateGenesis(data GenesisState) error {
 	if err := data.Params.Validate(); err != nil {
 		return err
 	}
 
-	return ValidateMinter(data.Minter)
+	// This validates Inflation, RewardPerBlock, TotalMinted, etc.
+	return ValidateMinter(*data.Minter)
 }

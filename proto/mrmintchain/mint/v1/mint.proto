@@ -1,0 +1,41 @@
+syntax = "proto3";
+package mrmintchain.mint.v1;
+
+import "cosmos/base/v1beta1/coin.proto";
+import "google/api/annotations.proto";
+import "cosmos_proto/cosmos.proto";
+ 
+import "gogoproto/gogo.proto";
+ 
+
+option go_package = "github.com/kamleshesporg/mrmintchain/x/mint/types";
+
+// Minter represents the minting state.
+message Minter {
+  string inflation = 1 [(gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (gogoproto.nullable) = false];
+  string annual_provisions = 2 [(gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (gogoproto.nullable) = false];
+  string reward_per_block = 3 [(gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (gogoproto.nullable) = false];
+string total_minted = 100 [
+  (gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec",
+  (gogoproto.nullable) = false
+];
+}
+
+// Params defines the parameters for the mint module.
+message Params {
+  string mint_denom = 1;
+  string inflation_rate_change = 2 [(gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (gogoproto.nullable) = false];
+  string inflation_max = 3 [(gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (gogoproto.nullable) = false];
+  string inflation_min = 4 [(gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (gogoproto.nullable) = false];
+  string goal_bonded = 5 [(gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (gogoproto.nullable) = false];
+  uint64 blocks_per_year = 6;
+  // Add your halving param here
+  uint64 halving_interval = 7;  // example field
+  string max_reward_tokens = 8 [(gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (gogoproto.nullable) = false];
+}
+
+// GenesisState defines the mint module's genesis state.
+message GenesisState {
+  Minter minter = 1;
+  Params params = 2;
+}
