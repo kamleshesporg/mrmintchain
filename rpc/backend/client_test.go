@@ -8,10 +8,10 @@ import (
 	codectypes "github.com/cosmos/cosmos-sdk/codec/types"
 	errortypes "github.com/cosmos/cosmos-sdk/types/errors"
 
-	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/kamleshesporg/mrmintchain/rpc/backend/mocks"
 	rpc "github.com/kamleshesporg/mrmintchain/rpc/types"
+	authtypes "github.com/kamleshesporg/mrmintchain/x/auth/types"
 	evmtypes "github.com/kamleshesporg/mrmintchain/x/evm/types"
 	mock "github.com/stretchr/testify/mock"
 	"github.com/stretchr/testify/require"

@@ -21,7 +21,7 @@ import (
 	"fmt"
 	"strconv"
 
-	govtypes "github.com/cosmos/cosmos-sdk/x/gov/types"
+	govtypes "github.com/kamleshesporg/mrmintchain/x/gov/types"
 
 	tmbytes "github.com/tendermint/tendermint/libs/bytes"
 	tmtypes "github.com/tendermint/tendermint/types"

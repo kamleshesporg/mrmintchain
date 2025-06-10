@@ -15,16 +15,16 @@ import (
 	tmjson "github.com/tendermint/tendermint/libs/json"
 
 	"github.com/cosmos/cosmos-sdk/simapp"
-	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
-	banktypes "github.com/cosmos/cosmos-sdk/x/bank/types"
+	authtypes "github.com/kamleshesporg/mrmintchain/x/auth/types"
+	banktypes "github.com/kamleshesporg/mrmintchain/x/bank/types"
 
 	feemarkettypes "github.com/kamleshesporg/mrmintchain/x/feemarket/types"
 
-	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core"
 	ethtypes "github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/crypto"
+	stakingtypes "github.com/kamleshesporg/mrmintchain/x/staking/types"
 	"github.com/stretchr/testify/require"
 	"github.com/stretchr/testify/suite"
 

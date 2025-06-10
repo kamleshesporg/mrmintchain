@@ -25,7 +25,7 @@ import (
 	sdkmath "cosmossdk.io/math"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	errortypes "github.com/cosmos/cosmos-sdk/types/errors"
-	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
+	authtypes "github.com/kamleshesporg/mrmintchain/x/auth/types"
 
 	"github.com/kamleshesporg/mrmintchain/x/evm/types"
 )

@@ -8,10 +8,10 @@ import (
 	"github.com/cosmos/cosmos-sdk/client"
 	codectypes "github.com/cosmos/cosmos-sdk/codec/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	authtx "github.com/cosmos/cosmos-sdk/x/auth/tx"
 	proto "github.com/gogo/protobuf/proto"
 	"github.com/kamleshesporg/mrmintchain/app"
 	"github.com/kamleshesporg/mrmintchain/encoding"
+	authtx "github.com/kamleshesporg/mrmintchain/x/auth/tx"
 	evmtypes "github.com/kamleshesporg/mrmintchain/x/evm/types"
 
 	"github.com/kamleshesporg/mrmintchain/tests"

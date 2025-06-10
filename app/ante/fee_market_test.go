@@ -5,10 +5,10 @@ import (
 
 	sdkmath "cosmossdk.io/math"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	banktypes "github.com/cosmos/cosmos-sdk/x/bank/types"
 	ethtypes "github.com/ethereum/go-ethereum/core/types"
 	"github.com/kamleshesporg/mrmintchain/app/ante"
 	"github.com/kamleshesporg/mrmintchain/tests"
+	banktypes "github.com/kamleshesporg/mrmintchain/x/bank/types"
 	evmtypes "github.com/kamleshesporg/mrmintchain/x/evm/types"
 )
 

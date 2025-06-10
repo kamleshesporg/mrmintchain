@@ -15,7 +15,7 @@
 // along with the mrmintchain library. If not, see https://github.com/kamleshesporg/mrmintchain/blob/main/LICENSE
 package types
 
-import paramtypes "github.com/cosmos/cosmos-sdk/x/params/types"
+import paramtypes "github.com/kamleshesporg/mrmintchain/x/params/types"
 
 // Parameter keys
 var (

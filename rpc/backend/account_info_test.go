@@ -5,9 +5,9 @@ import (
 	"math/big"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/common/hexutil"
+	authtypes "github.com/kamleshesporg/mrmintchain/x/auth/types"
 	tmrpcclient "github.com/tendermint/tendermint/rpc/client"
 	"google.golang.org/grpc/metadata"
 

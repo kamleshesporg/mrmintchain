@@ -14,8 +14,8 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
 	// "github.com/kamleshesporg/mrmintchain/x/mint/types"
-	paramtypes "github.com/cosmos/cosmos-sdk/x/params/types"
 	"github.com/kamleshesporg/mrmintchain/x/mint/types"
+	paramtypes "github.com/kamleshesporg/mrmintchain/x/params/types"
 )
 
 // Keeper of the mint store

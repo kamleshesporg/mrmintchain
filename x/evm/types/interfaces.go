@@ -18,11 +18,11 @@ package types
 import (
 	"math/big"
 
-	paramtypes "github.com/cosmos/cosmos-sdk/x/params/types"
+	paramtypes "github.com/kamleshesporg/mrmintchain/x/params/types"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
-	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
+	authtypes "github.com/kamleshesporg/mrmintchain/x/auth/types"
+	stakingtypes "github.com/kamleshesporg/mrmintchain/x/staking/types"
 
 	"github.com/ethereum/go-ethereum/core"
 	ethtypes "github.com/ethereum/go-ethereum/core/types"

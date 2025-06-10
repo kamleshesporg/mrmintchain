@@ -22,10 +22,10 @@ import (
 	"github.com/cosmos/cosmos-sdk/crypto/keyring"
 	"github.com/cosmos/cosmos-sdk/simapp"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
-	banktypes "github.com/cosmos/cosmos-sdk/x/bank/types"
-	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
+	authtypes "github.com/kamleshesporg/mrmintchain/x/auth/types"
+	banktypes "github.com/kamleshesporg/mrmintchain/x/bank/types"
 	feemarkettypes "github.com/kamleshesporg/mrmintchain/x/feemarket/types"
+	stakingtypes "github.com/kamleshesporg/mrmintchain/x/staking/types"
 	tmjson "github.com/tendermint/tendermint/libs/json"
 
 	"github.com/kamleshesporg/mrmintchain/app"

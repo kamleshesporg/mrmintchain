@@ -26,8 +26,8 @@ import (
 	sdkmath "cosmossdk.io/math"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	errortypes "github.com/cosmos/cosmos-sdk/types/errors"
-	authante "github.com/cosmos/cosmos-sdk/x/auth/ante"
-	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
+	authante "github.com/kamleshesporg/mrmintchain/x/auth/ante"
+	stakingtypes "github.com/kamleshesporg/mrmintchain/x/staking/types"
 
 	"github.com/kamleshesporg/mrmintchain/x/evm/types"
 )

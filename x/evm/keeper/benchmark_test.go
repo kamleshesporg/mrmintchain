@@ -8,8 +8,8 @@ import (
 	"github.com/stretchr/testify/require"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	authante "github.com/cosmos/cosmos-sdk/x/auth/ante"
 	"github.com/ethereum/go-ethereum/common"
+	authante "github.com/kamleshesporg/mrmintchain/x/auth/ante"
 
 	ethtypes "github.com/ethereum/go-ethereum/core/types"
 	mrmintchain "github.com/kamleshesporg/mrmintchain/types"

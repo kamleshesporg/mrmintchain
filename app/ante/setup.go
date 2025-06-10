@@ -24,8 +24,8 @@ import (
 	storetypes "github.com/cosmos/cosmos-sdk/store/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	errortypes "github.com/cosmos/cosmos-sdk/types/errors"
-	authante "github.com/cosmos/cosmos-sdk/x/auth/ante"
 	ethtypes "github.com/ethereum/go-ethereum/core/types"
+	authante "github.com/kamleshesporg/mrmintchain/x/auth/ante"
 	evmtypes "github.com/kamleshesporg/mrmintchain/x/evm/types"
 )
 

@@ -1,9 +1,9 @@
 package keeper_test
 
 import (
-	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
-	govtypes "github.com/cosmos/cosmos-sdk/x/gov/types"
+	authtypes "github.com/kamleshesporg/mrmintchain/x/auth/types"
 	"github.com/kamleshesporg/mrmintchain/x/feemarket/types"
+	govtypes "github.com/kamleshesporg/mrmintchain/x/gov/types"
 )
 
 func (suite *KeeperTestSuite) TestUpdateParams() {

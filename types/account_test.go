@@ -10,7 +10,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/codec"
 	codectypes "github.com/cosmos/cosmos-sdk/codec/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
+	authtypes "github.com/kamleshesporg/mrmintchain/x/auth/types"
 
 	cryptocodec "github.com/kamleshesporg/mrmintchain/crypto/codec"
 	"github.com/kamleshesporg/mrmintchain/crypto/ethsecp256k1"

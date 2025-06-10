@@ -26,8 +26,8 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	errortypes "github.com/cosmos/cosmos-sdk/types/errors"
 	"github.com/cosmos/cosmos-sdk/types/tx/signing"
-	authante "github.com/cosmos/cosmos-sdk/x/auth/ante"
-	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
+	authante "github.com/kamleshesporg/mrmintchain/x/auth/ante"
+	authtypes "github.com/kamleshesporg/mrmintchain/x/auth/types"
 
 	"github.com/kamleshesporg/mrmintchain/crypto/ethsecp256k1"
 )

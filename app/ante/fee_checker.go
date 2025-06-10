@@ -24,8 +24,8 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	errortypes "github.com/cosmos/cosmos-sdk/types/errors"
-	authante "github.com/cosmos/cosmos-sdk/x/auth/ante"
 	mrmintchain "github.com/kamleshesporg/mrmintchain/types"
+	authante "github.com/kamleshesporg/mrmintchain/x/auth/ante"
 	"github.com/kamleshesporg/mrmintchain/x/evm/types"
 )
 

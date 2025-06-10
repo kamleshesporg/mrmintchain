@@ -28,8 +28,6 @@ import (
 	"github.com/cosmos/cosmos-sdk/crypto/keyring"
 	sdkconfig "github.com/cosmos/cosmos-sdk/server/config"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	authtx "github.com/cosmos/cosmos-sdk/x/auth/tx"
-	distributiontypes "github.com/cosmos/cosmos-sdk/x/distribution/types"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/common/hexutil"
 	"github.com/ethereum/go-ethereum/crypto"
@@ -37,6 +35,8 @@ import (
 	rpctypes "github.com/kamleshesporg/mrmintchain/rpc/types"
 	"github.com/kamleshesporg/mrmintchain/server/config"
 	mrmintchain "github.com/kamleshesporg/mrmintchain/types"
+	authtx "github.com/kamleshesporg/mrmintchain/x/auth/tx"
+	distributiontypes "github.com/kamleshesporg/mrmintchain/x/distribution/types"
 	evmtypes "github.com/kamleshesporg/mrmintchain/x/evm/types"
 	tmtypes "github.com/tendermint/tendermint/types"
 )

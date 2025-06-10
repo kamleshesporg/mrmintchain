@@ -24,7 +24,7 @@ import (
 	"strings"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
+	authtypes "github.com/kamleshesporg/mrmintchain/x/auth/types"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 

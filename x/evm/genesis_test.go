@@ -5,9 +5,9 @@ import (
 
 	"github.com/ethereum/go-ethereum/common"
 
-	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 	"github.com/kamleshesporg/mrmintchain/crypto/ethsecp256k1"
 	mrmintchaintypes "github.com/kamleshesporg/mrmintchain/types"
+	authtypes "github.com/kamleshesporg/mrmintchain/x/auth/types"
 	"github.com/kamleshesporg/mrmintchain/x/evm"
 	"github.com/kamleshesporg/mrmintchain/x/evm/statedb"
 	"github.com/kamleshesporg/mrmintchain/x/evm/types"

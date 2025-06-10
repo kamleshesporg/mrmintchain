@@ -24,9 +24,9 @@ import (
 	servertypes "github.com/cosmos/cosmos-sdk/server/types"
 	"github.com/cosmos/cosmos-sdk/simapp"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	slashingtypes "github.com/cosmos/cosmos-sdk/x/slashing/types"
-	"github.com/cosmos/cosmos-sdk/x/staking"
-	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
+	slashingtypes "github.com/kamleshesporg/mrmintchain/x/slashing/types"
+	"github.com/kamleshesporg/mrmintchain/x/staking"
+	stakingtypes "github.com/kamleshesporg/mrmintchain/x/staking/types"
 
 	"github.com/kamleshesporg/mrmintchain/encoding"
 )

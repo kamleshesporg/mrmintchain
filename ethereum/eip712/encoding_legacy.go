@@ -20,7 +20,7 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/cosmos/cosmos-sdk/x/auth/migrations/legacytx"
+	"github.com/kamleshesporg/mrmintchain/x/auth/migrations/legacytx"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	txTypes "github.com/cosmos/cosmos-sdk/types/tx"

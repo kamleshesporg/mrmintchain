@@ -8,9 +8,9 @@ import (
 	cryptotypes "github.com/cosmos/cosmos-sdk/crypto/types"
 	"github.com/cosmos/cosmos-sdk/store/prefix"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	authsigning "github.com/cosmos/cosmos-sdk/x/auth/signing"
-	authtx "github.com/cosmos/cosmos-sdk/x/auth/tx"
-	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
+	authsigning "github.com/kamleshesporg/mrmintchain/x/auth/signing"
+	authtx "github.com/kamleshesporg/mrmintchain/x/auth/tx"
+	authtypes "github.com/kamleshesporg/mrmintchain/x/auth/types"
 
 	"github.com/ethereum/go-ethereum/common"
 	ethtypes "github.com/ethereum/go-ethereum/core/types"

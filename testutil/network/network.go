@@ -59,10 +59,10 @@ import (
 	"github.com/cosmos/cosmos-sdk/simapp/params"
 	"github.com/cosmos/cosmos-sdk/testutil"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
-	banktypes "github.com/cosmos/cosmos-sdk/x/bank/types"
 	"github.com/cosmos/cosmos-sdk/x/genutil"
-	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
+	authtypes "github.com/kamleshesporg/mrmintchain/x/auth/types"
+	banktypes "github.com/kamleshesporg/mrmintchain/x/bank/types"
+	stakingtypes "github.com/kamleshesporg/mrmintchain/x/staking/types"
 
 	"github.com/kamleshesporg/mrmintchain/crypto/hd"
 	"github.com/kamleshesporg/mrmintchain/encoding"

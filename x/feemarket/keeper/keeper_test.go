@@ -17,9 +17,9 @@ import (
 	"github.com/cosmos/cosmos-sdk/codec"
 	"github.com/cosmos/cosmos-sdk/crypto/keyring"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
-	stakingkeeper "github.com/cosmos/cosmos-sdk/x/staking/keeper"
-	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
+	authtypes "github.com/kamleshesporg/mrmintchain/x/auth/types"
+	stakingkeeper "github.com/kamleshesporg/mrmintchain/x/staking/keeper"
+	stakingtypes "github.com/kamleshesporg/mrmintchain/x/staking/types"
 
 	"github.com/kamleshesporg/mrmintchain/app"
 	"github.com/kamleshesporg/mrmintchain/crypto/ethsecp256k1"

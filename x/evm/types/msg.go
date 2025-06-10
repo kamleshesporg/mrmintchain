@@ -28,9 +28,9 @@ import (
 	"github.com/cosmos/cosmos-sdk/crypto/keyring"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	errortypes "github.com/cosmos/cosmos-sdk/types/errors"
-	"github.com/cosmos/cosmos-sdk/x/auth/ante"
-	"github.com/cosmos/cosmos-sdk/x/auth/signing"
-	authtx "github.com/cosmos/cosmos-sdk/x/auth/tx"
+	"github.com/kamleshesporg/mrmintchain/x/auth/ante"
+	"github.com/kamleshesporg/mrmintchain/x/auth/signing"
+	authtx "github.com/kamleshesporg/mrmintchain/x/auth/tx"
 
 	"github.com/kamleshesporg/mrmintchain/types"
 

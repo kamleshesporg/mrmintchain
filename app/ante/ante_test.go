@@ -10,6 +10,7 @@ import (
 
 	sdkmath "cosmossdk.io/math"
 	kmultisig "github.com/cosmos/cosmos-sdk/crypto/keys/multisig"
+	"github.com/kamleshesporg/mrmintchain/x/authz"
 	"github.com/stretchr/testify/suite"
 
 	"github.com/cosmos/cosmos-sdk/crypto/keys/ed25519"
@@ -18,10 +19,9 @@ import (
 	"github.com/cosmos/cosmos-sdk/crypto/types/multisig"
 	"github.com/cosmos/cosmos-sdk/simapp"
 	"github.com/cosmos/cosmos-sdk/types/tx/signing"
-	"github.com/cosmos/cosmos-sdk/x/auth/migrations/legacytx"
+	"github.com/kamleshesporg/mrmintchain/x/auth/migrations/legacytx"
 
-	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
-	"github.com/cosmos/cosmos-sdk/x/authz"
+	authtypes "github.com/kamleshesporg/mrmintchain/x/auth/types"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
@@ -32,8 +32,8 @@ import (
 	"github.com/kamleshesporg/mrmintchain/tests"
 	evmtypes "github.com/kamleshesporg/mrmintchain/x/evm/types"
 
-	banktypes "github.com/cosmos/cosmos-sdk/x/bank/types"
-	govtypes "github.com/cosmos/cosmos-sdk/x/gov/types/v1beta1"
+	banktypes "github.com/kamleshesporg/mrmintchain/x/bank/types"
+	govtypes "github.com/kamleshesporg/mrmintchain/x/gov/types/v1beta1"
 )
 
 func TestAnteTestSuite(t *testing.T) {

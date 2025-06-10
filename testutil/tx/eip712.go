@@ -28,9 +28,9 @@ import (
 	"github.com/ethereum/go-ethereum/crypto"
 	cryptocodec "github.com/kamleshesporg/mrmintchain/crypto/codec"
 
-	"github.com/cosmos/cosmos-sdk/x/auth/migrations/legacytx"
-	authtx "github.com/cosmos/cosmos-sdk/x/auth/tx"
 	"github.com/kamleshesporg/mrmintchain/ethereum/eip712"
+	"github.com/kamleshesporg/mrmintchain/x/auth/migrations/legacytx"
+	authtx "github.com/kamleshesporg/mrmintchain/x/auth/tx"
 
 	"github.com/cosmos/cosmos-sdk/types/tx/signing"
 	"github.com/ethereum/go-ethereum/signer/core/apitypes"

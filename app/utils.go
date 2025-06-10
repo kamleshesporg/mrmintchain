@@ -25,9 +25,9 @@ import (
 	"github.com/cosmos/cosmos-sdk/crypto/keys/secp256k1"
 	"github.com/cosmos/cosmos-sdk/simapp"
 	"github.com/cosmos/cosmos-sdk/testutil/mock"
-	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
-	banktypes "github.com/cosmos/cosmos-sdk/x/bank/types"
-	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
+	authtypes "github.com/kamleshesporg/mrmintchain/x/auth/types"
+	banktypes "github.com/kamleshesporg/mrmintchain/x/bank/types"
+	stakingtypes "github.com/kamleshesporg/mrmintchain/x/staking/types"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/kamleshesporg/mrmintchain/encoding"

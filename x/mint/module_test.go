@@ -11,7 +11,7 @@ import (
 	dbm "github.com/tendermint/tm-db"
 
 	"github.com/cosmos/cosmos-sdk/simapp"
-	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
+	authtypes "github.com/kamleshesporg/mrmintchain/x/auth/types"
 	"github.com/kamleshesporg/mrmintchain/x/mint/types"
 )
 

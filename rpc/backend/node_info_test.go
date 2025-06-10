@@ -5,12 +5,12 @@ import (
 	"math/big"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/common/hexutil"
 	"github.com/kamleshesporg/mrmintchain/crypto/ethsecp256k1"
 	"github.com/kamleshesporg/mrmintchain/rpc/backend/mocks"
 	mrmintchain "github.com/kamleshesporg/mrmintchain/types"
+	authtypes "github.com/kamleshesporg/mrmintchain/x/auth/types"
 	"github.com/spf13/viper"
 	tmrpcclient "github.com/tendermint/tendermint/rpc/client"
 	"google.golang.org/grpc/metadata"

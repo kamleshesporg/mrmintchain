@@ -20,9 +20,9 @@ import (
 	"fmt"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/crypto"
+	authtypes "github.com/kamleshesporg/mrmintchain/x/auth/types"
 	abci "github.com/tendermint/tendermint/abci/types"
 
 	mrmintchain "github.com/kamleshesporg/mrmintchain/types"

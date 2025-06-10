@@ -24,8 +24,8 @@ import (
 	cryptotypes "github.com/cosmos/cosmos-sdk/crypto/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/tx/signing"
-	authsigning "github.com/cosmos/cosmos-sdk/x/auth/signing"
 	"github.com/kamleshesporg/mrmintchain/app"
+	authsigning "github.com/kamleshesporg/mrmintchain/x/auth/signing"
 	evmtypes "github.com/kamleshesporg/mrmintchain/x/evm/types"
 )
 

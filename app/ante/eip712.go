@@ -25,10 +25,10 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	errortypes "github.com/cosmos/cosmos-sdk/types/errors"
 	"github.com/cosmos/cosmos-sdk/types/tx/signing"
-	authante "github.com/cosmos/cosmos-sdk/x/auth/ante"
-	"github.com/cosmos/cosmos-sdk/x/auth/migrations/legacytx"
-	authsigning "github.com/cosmos/cosmos-sdk/x/auth/signing"
 	ibcante "github.com/cosmos/ibc-go/v6/modules/core/ante"
+	authante "github.com/kamleshesporg/mrmintchain/x/auth/ante"
+	"github.com/kamleshesporg/mrmintchain/x/auth/migrations/legacytx"
+	authsigning "github.com/kamleshesporg/mrmintchain/x/auth/signing"
 
 	ethcrypto "github.com/ethereum/go-ethereum/crypto"
 	"github.com/ethereum/go-ethereum/crypto/secp256k1"

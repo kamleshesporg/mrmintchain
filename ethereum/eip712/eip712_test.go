@@ -21,18 +21,18 @@ import (
 
 	txtypes "github.com/cosmos/cosmos-sdk/types/tx"
 	"github.com/cosmos/cosmos-sdk/types/tx/signing"
-	authsigning "github.com/cosmos/cosmos-sdk/x/auth/signing"
-	banktypes "github.com/cosmos/cosmos-sdk/x/bank/types"
 	"github.com/kamleshesporg/mrmintchain/app"
 	"github.com/kamleshesporg/mrmintchain/cmd/config"
 	"github.com/kamleshesporg/mrmintchain/encoding"
 	"github.com/kamleshesporg/mrmintchain/testutil"
+	authsigning "github.com/kamleshesporg/mrmintchain/x/auth/signing"
+	banktypes "github.com/kamleshesporg/mrmintchain/x/bank/types"
 	evmtypes "github.com/kamleshesporg/mrmintchain/x/evm/types"
 
-	distributiontypes "github.com/cosmos/cosmos-sdk/x/distribution/types"
-	govtypesv1 "github.com/cosmos/cosmos-sdk/x/gov/types/v1"
-	govtypes "github.com/cosmos/cosmos-sdk/x/gov/types/v1beta1"
-	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
+	distributiontypes "github.com/kamleshesporg/mrmintchain/x/distribution/types"
+	govtypesv1 "github.com/kamleshesporg/mrmintchain/x/gov/types/v1"
+	govtypes "github.com/kamleshesporg/mrmintchain/x/gov/types/v1beta1"
+	stakingtypes "github.com/kamleshesporg/mrmintchain/x/staking/types"
 	"github.com/stretchr/testify/suite"
 )
 

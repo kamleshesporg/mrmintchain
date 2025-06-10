@@ -7,7 +7,6 @@ import (
 
 	codectypes "github.com/cosmos/cosmos-sdk/codec/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core"
 	ethtypes "github.com/ethereum/go-ethereum/core/types"
@@ -16,6 +15,7 @@ import (
 	"github.com/kamleshesporg/mrmintchain/x/evm/keeper"
 	"github.com/kamleshesporg/mrmintchain/x/evm/statedb"
 	"github.com/kamleshesporg/mrmintchain/x/evm/types"
+	stakingtypes "github.com/kamleshesporg/mrmintchain/x/staking/types"
 	"github.com/tendermint/tendermint/crypto/tmhash"
 	tmproto "github.com/tendermint/tendermint/proto/tendermint/types"
 	tmtypes "github.com/tendermint/tendermint/types"
