@@ -22,6 +22,8 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	"reflect"
+	"time"
 
 	"github.com/gorilla/mux"
 	"github.com/rakyll/statik/fs"
@@ -101,6 +103,7 @@ import (
 	upgradeclient "github.com/cosmos/cosmos-sdk/x/upgrade/client"
 	upgradekeeper "github.com/cosmos/cosmos-sdk/x/upgrade/keeper"
 	upgradetypes "github.com/cosmos/cosmos-sdk/x/upgrade/types"
+	"github.com/kamleshesporg/mrmintchain/x/customstaking"
 	"github.com/kamleshesporg/mrmintchain/x/mint"
 	mintkeeper "github.com/kamleshesporg/mrmintchain/x/mint/keeper"
 	minttypes "github.com/kamleshesporg/mrmintchain/x/mint/types"
@@ -221,18 +224,20 @@ type MrmintchainApp struct {
 	BankKeeper       bankkeeper.Keeper
 	CapabilityKeeper *capabilitykeeper.Keeper
 	StakingKeeper    stakingkeeper.Keeper
-	SlashingKeeper   slashingkeeper.Keeper
-	MintKeeper       mintkeeper.Keeper
-	DistrKeeper      distrkeeper.Keeper
-	GovKeeper        govkeeper.Keeper
-	CrisisKeeper     crisiskeeper.Keeper
-	UpgradeKeeper    upgradekeeper.Keeper
-	ParamsKeeper     paramskeeper.Keeper
-	FeeGrantKeeper   feegrantkeeper.Keeper
-	AuthzKeeper      authzkeeper.Keeper
-	IBCKeeper        *ibckeeper.Keeper // IBC Keeper must be a pointer in the app, so we can SetRouter on it correctly
-	EvidenceKeeper   evidencekeeper.Keeper
-	TransferKeeper   ibctransferkeeper.Keeper
+	CustomStaking    *customstaking.CustomKeeper
+
+	SlashingKeeper slashingkeeper.Keeper
+	MintKeeper     mintkeeper.Keeper
+	DistrKeeper    distrkeeper.Keeper
+	GovKeeper      govkeeper.Keeper
+	CrisisKeeper   crisiskeeper.Keeper
+	UpgradeKeeper  upgradekeeper.Keeper
+	ParamsKeeper   paramskeeper.Keeper
+	FeeGrantKeeper feegrantkeeper.Keeper
+	AuthzKeeper    authzkeeper.Keeper
+	IBCKeeper      *ibckeeper.Keeper // IBC Keeper must be a pointer in the app, so we can SetRouter on it correctly
+	EvidenceKeeper evidencekeeper.Keeper
+	TransferKeeper ibctransferkeeper.Keeper
 
 	// make scoped keepers public for test purposes
 	ScopedIBCKeeper      capabilitykeeper.ScopedKeeper
@@ -350,6 +355,7 @@ func NewmrmintchainApp(
 		app.BankKeeper,
 		app.GetSubspace(stakingtypes.ModuleName),
 	)
+
 	app.MintKeeper = mintkeeper.NewKeeper(
 		appCodec,
 		keys[minttypes.StoreKey],
@@ -394,13 +400,20 @@ func NewmrmintchainApp(
 		app.BaseApp,
 		authtypes.NewModuleAddress(govtypes.ModuleName).String())
 
+	app.CustomStaking = customstaking.NewCustomKeeper(
+		stakingKeeper,
+		time.Hour*24*30, // Validator time (30 days)
+		time.Hour*24*7,  // Delegator time (7 days)
+	)
+
+	app.StakingKeeper = app.CustomStaking.Keeper
+
 	// register the staking hooks
 	// NOTE: stakingKeeper above is passed by reference, so that it will contain these hooks
-	app.StakingKeeper = *stakingKeeper.SetHooks(
+	app.StakingKeeper.SetHooks(
 		stakingtypes.NewMultiStakingHooks(app.DistrKeeper.Hooks(),
 			app.SlashingKeeper.Hooks()),
 	)
-
 	app.AuthzKeeper = authzkeeper.NewKeeper(
 		keys[authzkeeper.StoreKey],
 		appCodec,
@@ -648,6 +661,7 @@ func NewmrmintchainApp(
 
 	app.ScopedIBCKeeper = scopedIBCKeeper
 	app.ScopedTransferKeeper = scopedTransferKeeper
+	fmt.Printf("StakingKeeper का वास्तविक टाइप: %v\n", reflect.TypeOf(app.StakingKeeper))
 
 	return app
 }
@@ -687,6 +701,16 @@ func (app *MrmintchainApp) setPostHandler() {
 	}
 
 	app.SetPostHandler(postHandler)
+}
+
+func (app *MrmintchainApp) init() {
+	// ... अन्य इनिशियलाइज़ेशन कोड
+
+	fmt.Printf("StakingKeeper का वास्तविक टाइप: %v\n", reflect.TypeOf(app.StakingKeeper))
+
+	// if _, ok := app.StakingKeeper.(*customstaking.CustomKeeper); !ok {
+	// 	panic("StakingKeeper कस्टम टाइप का नहीं है!")
+	// }
 }
 
 // Name returns the name of the App
